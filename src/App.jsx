@@ -1,13 +1,12 @@
 import React from "react";
 import Home from "./components/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SinglePost from "./components/SinglePost";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route></Route>
       </Routes>
     </BrowserRouter>
