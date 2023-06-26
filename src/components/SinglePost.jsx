@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-
+import { formatDate } from "../modules/formatDate";
 const SinglePost = () => {
   const { slug } = useParams();
 
@@ -27,7 +27,7 @@ const SinglePost = () => {
     <div className="card">
       <div className="card-body">
         <h2 className="card-title">{data.title.rendered}</h2>
-        <p className="card-text">{data.date}</p>
+        <p className="card-text">{formatDate(data.date)}</p>
         <div dangerouslySetInnerHTML={{ __html: data.content.rendered }}></div>
       </div>
     </div>

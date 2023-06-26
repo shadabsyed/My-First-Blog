@@ -4,6 +4,7 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { formatDate } from "../modules/formatDate";
 
 function Home() {
   const { isLoading, error, data } = useQuery({
@@ -27,7 +28,7 @@ function Home() {
               <div className="card mt-4">
                 <div className="card-body">
                   <h2 className="card-title">{post.title.rendered}</h2>
-                  <p className="card-text">{post.date}</p>
+                  <p className="card-text">{formatDate(post.date)}</p>
                   <div
                     className="card-text"
                     dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
