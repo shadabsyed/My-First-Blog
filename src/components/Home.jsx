@@ -5,6 +5,7 @@ import {
 } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { formatDate } from "../modules/formatDate";
+import ArrowRight from "../modules/ArrowRight";
 
 function Home() {
   const { isLoading, error, data } = useQuery({
@@ -21,11 +22,11 @@ function Home() {
 
   return (
     <>
-      <div className="row">
+      <div className="row p-5">
         {data &&
           data.map((post) => (
             <div key={post.id} className="col-md-4">
-              <div className="card mt-4">
+              <div className="card mt-4 custom-card" style={{ border: "none" }}>
                 <div className="card-body">
                   <h2 className="card-title">{post.title.rendered}</h2>
                   <p className="card-text">{formatDate(post.date)}</p>
@@ -33,7 +34,12 @@ function Home() {
                     className="card-text"
                     dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
                   ></div>
-                  <Link to={"/" + post.slug}>Read More</Link>
+                  <div className="link">
+                    <Link to={"/" + post.slug} className="card-link">
+                      Read More
+                    </Link>
+                    <ArrowRight />
+                  </div>
                 </div>
               </div>
             </div>

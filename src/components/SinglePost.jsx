@@ -17,17 +17,9 @@ function SinglePost() {
       ),
   });
 
-  if (isLoading) return "Loading...";
+  const data = postData?.[0];
 
-  if (error) return "An error has occurred: " + error.message;
-
-  const data = postData[0];
-
-  if (postData.length === 0) {
-    return "Sorry, The requested post was not found.";
-  }
-
-  const categoryId = data.categories[0];
+  const categoryId = data?.categories?.[0];
   const {
     isLoading: categoryLoading,
     error: categoryError,
@@ -38,11 +30,12 @@ function SinglePost() {
       fetch(`http://site1.local/wp-json/wp/v2/categories/${categoryId}`).then(
         (res) => res.json()
       ),
+    enabled: Boolean(categoryId),
   });
 
-  if (categoryLoading) return "Loading Category......";
+  if (isLoading) return "Loading...";
 
-  if (categoryError) return "Oops! there is error fetching category";
+  if (error) return "An error has occurred: " + error.message;
 
   const categoryName = categoryData;
 
