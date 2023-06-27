@@ -11,7 +11,7 @@ function Home() {
   const { isLoading, error, data } = useQuery({
     queryKey: ["allPosts"],
     queryFn: () =>
-      fetch("http://site1.local/wp-json/wp/v2/posts/").then((res) =>
+      fetch("https://onlydev.ml/stest/wp-json/wp/v2/posts/").then((res) =>
         res.json()
       ),
   });
@@ -25,8 +25,8 @@ function Home() {
       <div className="row p-5">
         {data &&
           data.map((post) => (
-            <div key={post.id} className="col-md-4">
-              <div className="card mt-4 custom-card" style={{ border: "none" }}>
+            <div key={post.id} className="col-md-4 mt-5">
+              <div className="card custom-card" style={{ border: "none" }}>
                 <div className="card-body">
                   <h2 className="card-title">{post.title.rendered}</h2>
                   <p className="card-text">{formatDate(post.date)}</p>

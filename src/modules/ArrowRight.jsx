@@ -7,7 +7,7 @@ function ArrowRight() {
       width="12"
       height="28"
       fill="currentColor"
-      ariaHidden="true"
+      aria-hidden="true"
       className="kadence-svg-icon kadence-arrow-right-alt-svg"
       viewBox="0 0 27 28"
     >
