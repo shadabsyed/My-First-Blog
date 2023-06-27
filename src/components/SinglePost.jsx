@@ -56,12 +56,36 @@ function SinglePost() {
     enabled: Boolean(featuredImageId),
   });
 
+  /**
+   * Fetch Author Name
+   */
+
+  const authorId = data?.author;
+
+  console.log(authorId);
+
+  const {
+    isLoading: authorLoading,
+    error: authorError,
+    data: authorData,
+  } = useQuery({
+    queryKey: ["author", authorId],
+    queryFn: () =>
+      fetch(`https://onlydev.ml/stest/wp-json/wp/v2/users/${authorId}`).then(
+        (res) => res.json()
+      ),
+    enabled: Boolean(authorId),
+  });
+
   if (isLoading) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
 
   const categoryName = categoryData;
   const imageUrl = imageData?.source_url;
+  const authorName = authorData?.name;
+
+  console.log(authorName);
 
   return (
     <div className="card">
@@ -69,7 +93,7 @@ function SinglePost() {
         {imageUrl && <img src={imageUrl} alt="Featured" />}
         <h2 className="card-title">{data.title.rendered}</h2>
         {categoryName && <p className="card-text">{categoryName.name}</p>}
-
+        {authorName && <p>{authorName}</p>}
         <p className="card-text">{formatDate(data.date)}</p>
         <div
           dangerouslySetInnerHTML={{ __html: data.content.rendered }}
