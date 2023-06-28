@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { formatDate } from "../modules/formatDate";
 import fetchPost from "../modules/fetch_posts_by_slug";
 import fetchCategory from "../modules/fetch_category";
 import fetchFeaturedImg from "../modules/fetch_featured_img";
+import { useQuery } from "@tanstack/react-query";
+import fetchAuthorName from "../modules/fetch_author_name";
 
 function SinglePost() {
   const { slug } = useParams();
@@ -39,22 +40,13 @@ function SinglePost() {
    * Fetch Author Name
    */
 
-  // const authorId = data?.author;
+  const authorId = data?.author;
 
-  // console.log(authorId);
-
-  // const {
-  //   isLoading: authorLoading,
-  //   error: authorError,
-  //   data: authorData,
-  // } = useQuery({
-  //   queryKey: ["author", authorId],
-  //   queryFn: () =>
-  //     fetch(`https://onlydev.ml/stest/wp-json/wp/v2/users/${authorId}`).then(
-  //       (res) => res.json()
-  //     ),
-  //   enabled: Boolean(authorId),
-  // });
+  const {
+    isLoading: authorLoading,
+    error: authorError,
+    data: authorData,
+  } = fetchAuthorName(authorId);
 
   if (isLoading) return "Loading...";
 
@@ -62,7 +54,7 @@ function SinglePost() {
 
   const categoryName = categoryData;
   const imageUrl = imageData?.source_url;
-  // const authorName = authorData?.name;
+  const authorName = authorData?.name;
 
   return (
     <div className="card">
@@ -70,8 +62,13 @@ function SinglePost() {
         {imageUrl && <img src={imageUrl} alt="Featured" />}
         <h2 className="card-title">{data.title.rendered}</h2>
         {categoryName && <p className="card-text">{categoryName.name}</p>}
-        {/* {authorName && <p>{authorName}</p>} */}
-        <p className="card-text">{formatDate(data.date)}</p>
+        {authorName && (
+          <p className="card-text">
+            by {authorName} <span className="dot"></span>
+            {formatDate(data.date)}
+          </p>
+        )}
+
         <div
           dangerouslySetInnerHTML={{ __html: data.content.rendered }}
           className="card-text"

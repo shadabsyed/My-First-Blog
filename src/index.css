@@ -34,3 +34,16 @@ body {
 .link:hover {
   color: #2b6cb0;
 }
+
+.dot::after {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  content: "";
+  display: inline-block;
+  background-color: currentColor;
+  height: 0.25rem;
+  width: 0.25rem;
+  opacity: 0.8;
+  border-radius: 9999px;
+  vertical-align: 0.1875em;
+}
