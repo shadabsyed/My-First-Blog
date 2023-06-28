@@ -5,7 +5,7 @@ import {
 } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { formatDate } from "../modules/formatDate";
-import ArrowRight from "../modules/ArrowRight";
+import ArrowRight from "./ArrowRight";
 
 function Home() {
   const { isLoading, error, data } = useQuery({

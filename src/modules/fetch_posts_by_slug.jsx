@@ -1,0 +1,13 @@
+import { useQuery } from "@tanstack/react-query";
+
+function fetchPost(slug) {
+  return useQuery({
+    queryKey: ["post", slug],
+    queryFn: () =>
+      fetch(`https://onlydev.ml/stest/wp-json/wp/v2/posts/?slug=${slug}`).then(
+        (res) => res.json()
+      ),
+  });
+}
+
+export default fetchPost;

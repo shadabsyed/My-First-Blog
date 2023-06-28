@@ -1,21 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { formatDate } from "../modules/formatDate";
+import fetchPost from "../modules/fetch_posts_by_slug";
+import fetchCategory from "../modules/fetch_category";
+import fetchFeaturedImg from "../modules/fetch_featured_img";
 
 function SinglePost() {
   const { slug } = useParams();
 
-  const {
-    isLoading,
-    error,
-    data: postData,
-  } = useQuery({
-    queryKey: ["post", slug],
-    queryFn: () =>
-      fetch(`https://onlydev.ml/stest/wp-json/wp/v2/posts/?slug=${slug}`).then(
-        (res) => res.json()
-      ),
-  });
+  const { isLoading, error, data: postData } = fetchPost(slug);
 
   const data = postData?.[0];
 
@@ -28,14 +21,7 @@ function SinglePost() {
     isLoading: categoryLoading,
     error: categoryError,
     data: categoryData,
-  } = useQuery({
-    queryKey: ["category", categoryId],
-    queryFn: () =>
-      fetch(
-        `https://onlydev.ml/stest/wp-json/wp/v2/categories/${categoryId}`
-      ).then((res) => res.json()),
-    enabled: Boolean(categoryId),
-  });
+  } = fetchCategory(categoryId);
 
   /**
    * Fetch Featured Image
@@ -47,35 +33,28 @@ function SinglePost() {
     isLoading: imageLoading,
     error: imageError,
     data: imageData,
-  } = useQuery({
-    queryKey: ["image", featuredImageId],
-    queryFn: () =>
-      fetch(
-        `https://onlydev.ml/stest/wp-json/wp/v2/media/${featuredImageId}`
-      ).then((res) => res.json()),
-    enabled: Boolean(featuredImageId),
-  });
+  } = fetchFeaturedImg(featuredImageId);
 
   /**
    * Fetch Author Name
    */
 
-  const authorId = data?.author;
+  // const authorId = data?.author;
 
-  console.log(authorId);
+  // console.log(authorId);
 
-  const {
-    isLoading: authorLoading,
-    error: authorError,
-    data: authorData,
-  } = useQuery({
-    queryKey: ["author", authorId],
-    queryFn: () =>
-      fetch(`https://onlydev.ml/stest/wp-json/wp/v2/users/${authorId}`).then(
-        (res) => res.json()
-      ),
-    enabled: Boolean(authorId),
-  });
+  // const {
+  //   isLoading: authorLoading,
+  //   error: authorError,
+  //   data: authorData,
+  // } = useQuery({
+  //   queryKey: ["author", authorId],
+  //   queryFn: () =>
+  //     fetch(`https://onlydev.ml/stest/wp-json/wp/v2/users/${authorId}`).then(
+  //       (res) => res.json()
+  //     ),
+  //   enabled: Boolean(authorId),
+  // });
 
   if (isLoading) return "Loading...";
 
@@ -83,9 +62,7 @@ function SinglePost() {
 
   const categoryName = categoryData;
   const imageUrl = imageData?.source_url;
-  const authorName = authorData?.name;
-
-  console.log(authorName);
+  // const authorName = authorData?.name;
 
   return (
     <div className="card">
@@ -93,7 +70,7 @@ function SinglePost() {
         {imageUrl && <img src={imageUrl} alt="Featured" />}
         <h2 className="card-title">{data.title.rendered}</h2>
         {categoryName && <p className="card-text">{categoryName.name}</p>}
-        {authorName && <p>{authorName}</p>}
+        {/* {authorName && <p>{authorName}</p>} */}
         <p className="card-text">{formatDate(data.date)}</p>
         <div
           dangerouslySetInnerHTML={{ __html: data.content.rendered }}
