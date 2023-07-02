@@ -1,20 +1,12 @@
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { formatDate } from "../modules/formatDate";
 import ArrowRight from "./ArrowRight";
+import fetchPost from "../modules/Home-page-modules/fetch_posts";
 
 function Home() {
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["allPosts"],
-    queryFn: () =>
-      fetch("https://onlydev.ml/stest/wp-json/wp/v2/posts/").then((res) =>
-        res.json()
-      ),
-  });
+  const { isLoading, error, data } = fetchPost();
+
+  console.log(data);
 
   if (isLoading) return "Loading...";
 
