@@ -57,23 +57,30 @@ function SinglePost() {
 
   if (imageUrl && categoryName && authorName)
     return (
-      <div className="card">
-        <div className="card-body">
-          <img src={imageUrl} alt="Featured"  />
+      <div className="container">
+        <div className="img">
+          <img src={imageUrl} alt="Featured" />
+        </div>
+        <div className="card singlePost-card" style={{ border: "none" }}>
+          <div className="card-body cont">
+            <p className="card-text singlePage-category category">
+              {categoryName.name}
+            </p>
 
-          <p className="card-text category">{categoryName.name}</p>
+            <h2 className="card-title singlePage-title">
+              {data.title.rendered}
+            </h2>
 
-          <h2 className="card-title">{data.title.rendered}</h2>
+            <p className="card-text">
+              by {authorName} <span className="dot"></span>
+              {formatDate(data.date)}
+            </p>
 
-          <p className="card-text">
-            by {authorName} <span className="dot"></span>
-            {formatDate(data.date)}
-          </p>
-
-          <div
-            dangerouslySetInnerHTML={{ __html: data.content.rendered }}
-            className="card-text"
-          ></div>
+            <div
+              dangerouslySetInnerHTML={{ __html: data.content.rendered }}
+              className="card-text content"
+            ></div>
+          </div>
         </div>
       </div>
     );

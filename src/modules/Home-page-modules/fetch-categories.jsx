@@ -8,6 +8,7 @@ export function fetchCategories(data) {
     });
 
   categoryIds = [...new Set(categoryIds)];
+
   return useQuery({
     queryKey: ["allCategories"],
     queryFn: () =>

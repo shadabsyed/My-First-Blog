@@ -19,15 +19,25 @@ function Home() {
         <div className="row p-5">
           {data &&
             data.map((post) => {
-              const categoryName = categories.find((category) =>
-                post.categories.includes(category.id)
-              ).name;
+              const categoryNames = [];
+              post.categories.forEach((categoryId) => {
+                const category = categories.find(
+                  (category) => category.id === categoryId
+                );
+                if (category) {
+                  categoryNames.push(category.name);
+                }
+              });
               return (
                 <div key={post.id} className="col-md-4 mt-5">
                   <div className="card custom-card" style={{ border: "none" }}>
                     <div className="card-body">
-                      <h2 className="card-title">{post.title.rendered}</h2>
-                      <p>{categoryName}</p>
+                      <p className="card-text homePage-category category">
+                        {categoryNames.join(" | ")}
+                      </p>
+                      <h2 className="card-title homePage-title">
+                        {post.title.rendered}
+                      </h2>
                       <p className="card-text">{formatDate(post.date)}</p>
                       <div
                         className="card-text"
