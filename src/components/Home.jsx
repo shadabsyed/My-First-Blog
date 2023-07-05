@@ -4,6 +4,7 @@ import ArrowRight from "./ArrowRight";
 import fetchPost from "../modules/Home-page-modules/fetch_posts";
 import { fetchCategories } from "../modules/Home-page-modules/fetch-categories";
 import { fetchFeaturedImgs } from "../modules/Home-page-modules/fetch-featured-images";
+import { fetchAuthorName } from "../modules/Home-page-modules/fetch-author-name";
 
 function Home() {
   const { isLoading, error, data } = fetchPost();
@@ -11,6 +12,8 @@ function Home() {
   const { data: categories } = fetchCategories(data);
 
   const { data: featuredImages } = fetchFeaturedImgs();
+
+  const { data: authorData } = fetchAuthorName();
 
   if (isLoading) return "Loading...";
 
@@ -35,23 +38,31 @@ function Home() {
               const featuredImage = featuredImages.find(
                 (image) => image.id === post.featured_media
               );
+
+              const authorName = authorData.find(
+                (author) => author.id === post.author
+              );
               return (
                 <div key={post.id} className="col-md-4 mt-5">
                   <div className="card custom-card" style={{ border: "none" }}>
+                    {featuredImage && (
+                      <img
+                        src={featuredImage.source_url}
+                        className="card-img-top"
+                      />
+                    )}
                     <div className="card-body">
-                      {featuredImage && (
-                        <img
-                          src={featuredImage.source_url}
-                          className="card-img-top"
-                        />
-                      )}
                       <p className="card-text homePage-category category">
                         {categoryNames.join(" | ")}
                       </p>
                       <h2 className="card-title homePage-title">
                         {post.title.rendered}
                       </h2>
-                      <p className="card-text">{formatDate(post.date)}</p>
+                      <p className="card-text">
+                        {" "}
+                        by {authorName.name} <span className="dot"></span>{" "}
+                        {formatDate(post.date)}
+                      </p>
                       <div
                         className="card-text"
                         dangerouslySetInnerHTML={{
