@@ -7,10 +7,14 @@ body {
 }
 
 .custom-card {
-  width: 90%;
+  /* width: 90%; */
   /* height: 100%; */
   box-shadow: 0px 15px 15px -10px rgba(0, 0, 0, 0.05);
 }
+
+/* .card-image-top {
+  width: 300px;
+} */
 
 .singlePost-card {
   width: 800px;
