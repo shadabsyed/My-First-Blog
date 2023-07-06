@@ -8,12 +8,17 @@ body {
 
 .custom-card {
   /* width: 18rem; */
-  /* height: 100%; */
+  height: 100%;
   box-shadow: 0px 15px 15px -10px rgba(0, 0, 0, 0.05);
 }
 
-/* .card-image-top {
-  width: 300px;
+.card-img-top {
+  height: 250px;
+}
+
+/* .container {
+  background-color: #f7fafc;
+  margin: 0;
 } */
 
 .singlePost-card {
@@ -41,6 +46,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
+  /* background-color: #f7fafc; */
 }
 
 .img img {
@@ -59,10 +65,13 @@ body {
 
 .homePage-title {
   font-size: 28px;
+  text-decoration: none;
+  color: black;
 }
 
 .card-title:hover {
   color: #2b6cb0;
+  text-decoration: none;
 }
 
 .card-link {

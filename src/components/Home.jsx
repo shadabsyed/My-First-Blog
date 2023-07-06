@@ -46,17 +46,25 @@ function Home() {
                 <div key={post.id} className="col-md-4 mt-5">
                   <div className="card custom-card" style={{ border: "none" }}>
                     {featuredImage && (
-                      <img
-                        src={featuredImage.source_url}
-                        className="card-img-top"
-                      />
+                      <Link to={"/" + post.slug}>
+                        <img
+                          src={featuredImage.source_url}
+                          className="card-img-top"
+                        />
+                      </Link>
                     )}
                     <div className="card-body">
                       <p className="card-text homePage-category category">
                         {categoryNames.join(" | ")}
                       </p>
-                      <h2 className="card-title homePage-title">
-                        {post.title.rendered}
+                      <h2>
+                        <Link
+                          to={"/" + post.slug}
+                          className="card-title homePage-title"
+                        >
+                          {" "}
+                          {post.title.rendered}
+                        </Link>
                       </h2>
                       <p className="card-text">
                         {" "}
