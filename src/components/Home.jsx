@@ -5,8 +5,13 @@ import fetchPost from "../modules/Home-page-modules/fetch_posts";
 import { fetchCategories } from "../modules/Home-page-modules/fetch-categories";
 import { fetchFeaturedImgs } from "../modules/Home-page-modules/fetch-featured-images";
 import { fetchAuthorName } from "../modules/Home-page-modules/fetch-author-name";
+import { useEffect } from "react";
 
 function Home() {
+  useEffect(() => {
+    document.title = "Home Page";
+  }, []);
+
   const { isLoading, error, data } = fetchPost();
 
   const { data: categories } = fetchCategories(data);

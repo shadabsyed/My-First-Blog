@@ -13,7 +13,7 @@ export function fetchCategories(data) {
     queryKey: ["allCategories"],
     queryFn: () =>
       fetch(
-        `https://onlydev.ml/stest/wp-json/wp/v2/categories?include=${categoryIds.join(
+        `http://hostplover.com/stest/wp-json/wp/v2/categories?include=${categoryIds.join(
           ","
         )}`
       ).then((res) => res.json()),

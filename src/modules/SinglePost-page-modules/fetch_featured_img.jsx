@@ -5,7 +5,7 @@ function fetchFeaturedImg(featuredImageId) {
     queryKey: ["image", featuredImageId],
     queryFn: () =>
       fetch(
-        `https://onlydev.ml/stest/wp-json/wp/v2/media/${featuredImageId}`
+        `http://hostplover.com/stest/wp-json/wp/v2/media/${featuredImageId}`
       ).then((res) => res.json()),
     enabled: Boolean(featuredImageId),
   });

@@ -4,9 +4,9 @@ function fetchPost(slug) {
   return useQuery({
     queryKey: ["post", slug],
     queryFn: () =>
-      fetch(`https://onlydev.ml/stest/wp-json/wp/v2/posts/?slug=${slug}`).then(
-        (res) => res.json()
-      ),
+      fetch(
+        `http://hostplover.com/stest/wp-json/wp/v2/posts/?slug=${slug}`
+      ).then((res) => res.json()),
   });
 }
 

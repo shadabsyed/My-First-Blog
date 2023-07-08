@@ -4,7 +4,7 @@ export function fetchFeaturedImgs() {
   return useQuery({
     queryKey: ["featuredImages"],
     queryFn: () =>
-      fetch("https://onlydev.ml/stest/wp-json/wp/v2/media").then((res) =>
+      fetch("http://hostplover.com/stest/wp-json/wp/v2/media").then((res) =>
         res.json()
       ),
   });

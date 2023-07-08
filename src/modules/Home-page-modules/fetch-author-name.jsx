@@ -4,7 +4,7 @@ export function fetchAuthorName() {
   return useQuery({
     queryKey: ["authorName"],
     queryFn: () =>
-      fetch("https://onlydev.ml/stest/wp-json/wp/v2/users").then((res) =>
+      fetch("http://hostplover.com/stest/wp-json/wp/v2/users").then((res) =>
         res.json()
       ),
   });

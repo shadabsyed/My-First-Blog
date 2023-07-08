@@ -5,7 +5,7 @@ function fetchCategory(categoryId) {
     queryKey: ["category", categoryId],
     queryFn: () =>
       fetch(
-        `https://onlydev.ml/stest/wp-json/wp/v2/categories/${categoryId}`
+        `http://hostplover.com/stest/wp-json/wp/v2/categories/${categoryId}`
       ).then((res) => res.json()),
     enabled: Boolean(categoryId),
   });
