@@ -5,6 +5,7 @@ import { formatDate } from "../modules/formatDate";
 import { Link } from "react-router-dom";
 import ArrowRight from "./ArrowRight";
 import fetchCategIdByCategSlug from "../modules/SameCategPosts-page-modules/fetch-categId-by-categSlug";
+import fetchPostsByCategId from "../modules/SameCategPosts-page-modules/fetch-posts-by-categId";
 
 const SameCategPosts = () => {
   useEffect(() => {
@@ -17,14 +18,7 @@ const SameCategPosts = () => {
 
   const categoryId = categorySlugData?.[0]?.id;
 
-  const { data: categoryPosts } = useQuery({
-    queryKey: ["categoryPosts", categoryId],
-    queryFn: () =>
-      fetch(
-        `https://hostplover.com/stest/wp-json/wp/v2/posts?categories=${categoryId}`
-      ).then((res) => res.json()),
-    enabled: !!categoryId,
-  });
+  const { data: categoryPosts } = fetchPostsByCategId(categoryId);
 
   return (
     <>
