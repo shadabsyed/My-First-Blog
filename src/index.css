@@ -69,6 +69,24 @@ body {
   color: black;
 }
 
+.categorySlugCont {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 0;
+  background-color: #edf2f7;
+  margin-top: 30px;
+}
+
+.categorySlug {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.5;
+}
+
 .card-title:hover {
   color: #2b6cb0;
   text-decoration: none;

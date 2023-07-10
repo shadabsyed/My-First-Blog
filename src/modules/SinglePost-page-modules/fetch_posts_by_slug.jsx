@@ -5,7 +5,7 @@ function fetchPost(slug) {
     queryKey: ["post", slug],
     queryFn: () =>
       fetch(
-        `http://hostplover.com/stest/wp-json/wp/v2/posts/?slug=${slug}`
+        `https://hostplover.com/stest/wp-json/wp/v2/posts/?slug=${slug}`
       ).then((res) => res.json()),
   });
 }

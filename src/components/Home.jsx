@@ -59,9 +59,11 @@ function Home() {
                       </Link>
                     )}
                     <div className="card-body">
-                      <p className="card-text homePage-category category">
-                        {categoryNames.join(" | ")}
-                      </p>
+                      <Link to={`/category/${categoryNames[0]}`}>
+                        <p className="card-text homePage-category category">
+                          {categoryNames.join(" | ")}
+                        </p>
+                      </Link>
                       <h2>
                         <Link
                           to={"/" + post.slug}
