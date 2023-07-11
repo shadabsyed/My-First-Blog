@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import ArrowRight from "./ArrowRight";
 import fetchCategIdByCategSlug from "../modules/SameCategPosts-page-modules/fetch-categId-by-categSlug";
 import fetchPostsByCategId from "../modules/SameCategPosts-page-modules/fetch-posts-by-categId";
+import fetchCategoryName from "../modules/SameCategPosts-page-modules/fetch-categoryName";
 
 const SameCategPosts = () => {
   useEffect(() => {
@@ -23,25 +24,16 @@ const SameCategPosts = () => {
   const categoryId = categorySlugData?.[0]?.id;
 
   /**
-   *  fetching category name by category id
-   */
-
-  const { data: categoryName } = useQuery({
-    queryKey: ["categoryName", categoryId],
-    queryFn: () =>
-      fetch(
-        `https://hostplover.com/stest/wp-json/wp/v2/categories/${categoryId}`
-      ).then((res) => res.json()),
-    enabled: Boolean(categoryId),
-  });
-
-  console.log(categoryName);
-
-  /**
    *   fetcing posts by category id
    */
 
   const { data: categoryPosts } = fetchPostsByCategId(categoryId);
+
+  /**
+   *  fetching category name by category id
+   */
+
+  const { data: categoryName } = fetchCategoryName(categoryId);
 
   return (
     <>
@@ -55,7 +47,7 @@ const SameCategPosts = () => {
               <div className="card-body">
                 <h2 className="card-title">{post.title.rendered}</h2>
                 {categoryName && <p>{categoryName?.name}</p>}
-                <p>{post.category.name}</p>
+
                 <p>{formatDate(post.date)}</p>
                 <div
                   className="card-text"
