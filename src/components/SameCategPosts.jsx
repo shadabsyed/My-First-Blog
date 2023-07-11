@@ -14,9 +14,32 @@ const SameCategPosts = () => {
 
   const { category_slug } = useParams();
 
+  /**
+   *  fethcing catgeory id by categroy slug
+   */
+
   const { data: categorySlugData } = fetchCategIdByCategSlug(category_slug);
 
   const categoryId = categorySlugData?.[0]?.id;
+
+  /**
+   *  fetching category name by category id
+   */
+
+  const { data: categoryName } = useQuery({
+    queryKey: ["categoryName", categoryId],
+    queryFn: () =>
+      fetch(
+        `https://hostplover.com/stest/wp-json/wp/v2/categories/${categoryId}`
+      ).then((res) => res.json()),
+    enabled: Boolean(categoryId),
+  });
+
+  console.log(categoryName);
+
+  /**
+   *   fetcing posts by category id
+   */
 
   const { data: categoryPosts } = fetchPostsByCategId(categoryId);
 
@@ -31,6 +54,8 @@ const SameCategPosts = () => {
             <div className="card custom-card" style={{ border: "none" }}>
               <div className="card-body">
                 <h2 className="card-title">{post.title.rendered}</h2>
+                {categoryName && <p>{categoryName?.name}</p>}
+                <p>{post.category.name}</p>
                 <p>{formatDate(post.date)}</p>
                 <div
                   className="card-text"
