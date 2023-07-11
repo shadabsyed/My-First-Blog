@@ -35,6 +35,23 @@ const SameCategPosts = () => {
 
   const { data: categoryName } = fetchCategoryName(categoryId);
 
+  /**
+   *  fetching featured img
+   */
+
+  const featuredImg = categoryPosts?.[0]?.featured_media;
+
+  const { data: FimageData } = useQuery({
+    queryKey: ["Fimage", featuredImg],
+    queryFn: () =>
+      fetch(
+        `https://hostplover.com/stest/wp-json/wp/v2/media/${featuredImg}`
+      ).then((res) => res.json()),
+    enabled: Boolean(featuredImg),
+  });
+
+  const img = FimageData?.source_url;
+
   return (
     <>
       <div className="categorySlugCont">
@@ -44,6 +61,7 @@ const SameCategPosts = () => {
         {categoryPosts?.map((post) => (
           <div key={post.id} className="col-md-4 mt-4">
             <div className="card custom-card" style={{ border: "none" }}>
+              {img && <img src={img} className="card-img-top" />}
               <div className="card-body">
                 <h2 className="card-title">{post.title.rendered}</h2>
                 {categoryName && <p>{categoryName?.name}</p>}
