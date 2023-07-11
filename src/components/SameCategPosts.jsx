@@ -1,13 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { formatDate } from "../modules/formatDate";
 import { Link } from "react-router-dom";
+// Components
 import ArrowRight from "./ArrowRight";
+// Modules
 import fetchCategIdByCategSlug from "../modules/SameCategPosts-page-modules/fetch-categId-by-categSlug";
 import fetchPostsByCategId from "../modules/SameCategPosts-page-modules/fetch-posts-by-categId";
 import fetchCategoryName from "../modules/SameCategPosts-page-modules/fetch-categoryName";
 import fetchFdImg from "../modules/SameCategPosts-page-modules/fetch-featuredImg";
+import fetchAuthorName from "../modules/SameCategPosts-page-modules/fetch-authorName";
 
 const SameCategPosts = () => {
   useEffect(() => {
@@ -46,6 +48,20 @@ const SameCategPosts = () => {
 
   const img = FimageData?.source_url;
 
+  /**
+   *   fetching author name
+   */
+
+  const authorId = categoryPosts?.[0]?.author;
+
+  const { data: authorData } = fetchAuthorName(authorId);
+
+  const authorName = authorData?.name;
+
+  /**
+   *  Displaying fetched data
+   */
+
   return (
     <>
       <div className="categorySlugCont">
@@ -59,6 +75,8 @@ const SameCategPosts = () => {
               <div className="card-body">
                 <h2 className="card-title">{post.title.rendered}</h2>
                 {categoryName && <p>{categoryName?.name}</p>}
+
+                {authorName && <p>{authorName}</p>}
 
                 <p>{formatDate(post.date)}</p>
                 <div
