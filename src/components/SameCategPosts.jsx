@@ -7,6 +7,7 @@ import ArrowRight from "./ArrowRight";
 import fetchCategIdByCategSlug from "../modules/SameCategPosts-page-modules/fetch-categId-by-categSlug";
 import fetchPostsByCategId from "../modules/SameCategPosts-page-modules/fetch-posts-by-categId";
 import fetchCategoryName from "../modules/SameCategPosts-page-modules/fetch-categoryName";
+import fetchFdImg from "../modules/SameCategPosts-page-modules/fetch-featuredImg";
 
 const SameCategPosts = () => {
   useEffect(() => {
@@ -41,14 +42,7 @@ const SameCategPosts = () => {
 
   const featuredImg = categoryPosts?.[0]?.featured_media;
 
-  const { data: FimageData } = useQuery({
-    queryKey: ["Fimage", featuredImg],
-    queryFn: () =>
-      fetch(
-        `https://hostplover.com/stest/wp-json/wp/v2/media/${featuredImg}`
-      ).then((res) => res.json()),
-    enabled: Boolean(featuredImg),
-  });
+  const { data: FimageData } = fetchFdImg(featuredImg);
 
   const img = FimageData?.source_url;
 
