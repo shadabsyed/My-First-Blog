@@ -1,22 +1,34 @@
 import { Link } from "react-router-dom";
-import { formatDate } from "../modules/formatDate";
+import { useEffect, useState } from "react";
+
+// Componenets
 import ArrowRight from "./ArrowRight";
-import fetchPost from "../modules/Home-page-modules/fetch_posts";
+// Modules
 import { fetchCategories } from "../modules/Home-page-modules/fetch-categories";
 import { fetchFeaturedImgs } from "../modules/Home-page-modules/fetch-featured-images";
 import { fetchAuthorName } from "../modules/Home-page-modules/fetch-author-name";
-import { useEffect } from "react";
+import { formatDate } from "../modules/formatDate";
+import fetchPosts from "../modules/Home-page-modules/fetch_posts";
 
 function Home() {
   useEffect(() => {
     document.title = "Home Page";
   }, []);
 
-  const { isLoading, error, data } = fetchPost();
+  // Fetching all posts
+
+  const [pageNumber, setPageNumber] = useState(1);
+  const { isLoading, error, data } = fetchPosts(pageNumber);
+
+  // fetching category
 
   const { data: categories } = fetchCategories(data);
 
+  // fetching featured media
+
   const { data: featuredImages } = fetchFeaturedImgs();
+
+  // fetching author name
 
   const { data: authorData } = fetchAuthorName();
 
@@ -29,7 +41,7 @@ function Home() {
       <>
         <div className="row p-5">
           {data &&
-            data.map((post) => {
+            data?.map((post) => {
               const categoryNames = [];
               post.categories.forEach((categoryId) => {
                 const category = categories.find(
@@ -40,7 +52,7 @@ function Home() {
                 }
               });
 
-              const featuredImage = featuredImages.find(
+              const featuredImage = featuredImages?.find(
                 (image) => image.id === post.featured_media
               );
 
@@ -96,6 +108,18 @@ function Home() {
               );
             })}
         </div>
+        <button
+          onClick={() => setPageNumber((page) => page - 1)}
+          disabled={pageNumber === 1}
+        >
+          Prev page
+        </button>
+        <button
+          onClick={() => setPageNumber((page) => page + 1)}
+          disabled={pageNumber === 5}
+        >
+          Next page
+        </button>
       </>
     );
   }

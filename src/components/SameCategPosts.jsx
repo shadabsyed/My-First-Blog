@@ -76,9 +76,12 @@ const SameCategPosts = () => {
                 <h2 className="card-title">{post.title.rendered}</h2>
                 {categoryName && <p>{categoryName?.name}</p>}
 
-                {authorName && <p>{authorName}</p>}
+                <p className="card-text">
+                  {" "}
+                  by {authorName} <span className="dot"></span>{" "}
+                  {formatDate(post.date)}
+                </p>
 
-                <p>{formatDate(post.date)}</p>
                 <div
                   className="card-text"
                   dangerouslySetInnerHTML={{

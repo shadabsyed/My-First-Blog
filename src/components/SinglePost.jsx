@@ -1,15 +1,20 @@
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+// Modules
 import { formatDate } from "../modules/formatDate";
 import fetchPost from "../modules/SinglePost-page-modules/fetch_posts_by_slug";
 import fetchCategory from "../modules/SinglePost-page-modules/fetch_category";
 import fetchFeaturedImg from "../modules/SinglePost-page-modules/fetch_featured_img";
 import fetchAuthorName from "../modules/SinglePost-page-modules/fetch_author_name";
-import { useEffect } from "react";
 
 function SinglePost() {
   useEffect(() => {
     document.title = "SinglePost Page";
   }, []);
+
+  /**
+   *  fetch posts
+   */
 
   const { post_slug: slug } = useParams();
 
