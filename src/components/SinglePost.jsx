@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 // Modules
 import { formatDate } from "../modules/formatDate";
@@ -57,7 +57,17 @@ function SinglePost() {
     data: authorData,
   } = fetchAuthorName(authorId);
 
-  if (isLoading) return "Loading...";
+  if (isLoading)
+    return (
+      <div className="center">
+        <div className="loadingio-spinner-ripple-4h8u8pyu3ec">
+          <div className="ldio-kp674rbvsx">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    );
 
   if (error) return "An error has occurred: " + error.message;
 

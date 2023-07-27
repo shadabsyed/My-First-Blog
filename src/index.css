@@ -5,6 +5,61 @@ body {
 .row {
   background-color: #f7fafc;
 }
+@keyframes ldio-kp674rbvsx {
+  0% {
+    top: 96px;
+    left: 96px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 18px;
+    left: 18px;
+    width: 156px;
+    height: 156px;
+    opacity: 0;
+  }
+}
+.ldio-kp674rbvsx div {
+  position: absolute;
+  border-width: 7px;
+  border-style: solid;
+  opacity: 1;
+  border-radius: 50%;
+  animation: ldio-kp674rbvsx 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.ldio-kp674rbvsx div:nth-child(1) {
+  border-color: #130ce9;
+  animation-delay: 0s;
+}
+.ldio-kp674rbvsx div:nth-child(2) {
+  border-color: #46dff0;
+  animation-delay: -0.5s;
+}
+.loadingio-spinner-ripple-4h8u8pyu3ec {
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  overflow: hidden;
+  background: #ffffff;
+}
+.ldio-kp674rbvsx {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+.ldio-kp674rbvsx div {
+  box-sizing: content-box;
+}
+
+.center {
+  text-align: center;
+  margin-top: 200px;
+}
 
 .custom-card {
   /* width: 18rem; */
@@ -15,7 +70,9 @@ body {
 .card-img-top {
   height: 250px;
 }
-
+.nav-cont {
+  margin-left: 550px;
+}
 /* .container {
   background-color: #f7fafc;
   margin: 0;
@@ -23,7 +80,7 @@ body {
 
 .singlePost-card {
   width: 800px;
-  height: 625px;
+  height: 100%;
   margin-left: auto;
   margin-right: auto;
   z-index: 1;

@@ -14,6 +14,11 @@ function Home() {
   useEffect(() => {
     document.title = "Home Page";
   }, []);
+  fetch(
+    "https://hostplover.com/stest/wp-json/wp/v2/posts?page=2&per_page=8"
+  ).then((res) => {
+    console.log(res.headers);
+  });
 
   // Fetching all posts
 
@@ -26,13 +31,23 @@ function Home() {
 
   // fetching featured media
 
-  const { data: featuredImages } = fetchFeaturedImgs();
+  const { data: featuredImages } = fetchFeaturedImgs(data, pageNumber);
 
   // fetching author name
 
   const { data: authorData } = fetchAuthorName();
 
-  if (isLoading) return "Loading...";
+  if (isLoading)
+    return (
+      <div className="center">
+        <div className="loadingio-spinner-ripple-4h8u8pyu3ec">
+          <div className="ldio-kp674rbvsx">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    );
 
   if (error) return "An error has occurred: " + error.message;
 
@@ -108,18 +123,56 @@ function Home() {
               );
             })}
         </div>
-        <button
-          onClick={() => setPageNumber((page) => page - 1)}
-          disabled={pageNumber === 1}
-        >
-          Prev page
-        </button>
-        <button
-          onClick={() => setPageNumber((page) => page + 1)}
-          disabled={pageNumber === 5}
-        >
-          Next page
-        </button>
+
+        <nav aria-label="Page navigation example" className="nav-cont">
+          <ul className="pagination">
+            <li className="page-item">
+              <a
+                className="page-link"
+                onClick={() => setPageNumber((page) => page - 1)}
+                disabled={pageNumber === 1}
+                aria-label="Previous"
+              >
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#">
+                1
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#">
+                2
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#">
+                3
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#">
+                4
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#">
+                5
+              </a>
+            </li>
+            <li className="page-item">
+              <a
+                className="page-link"
+                onClick={() => setPageNumber((page) => page + 1)}
+                disabled={pageNumber === 5}
+                aria-label="Next"
+              >
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </>
     );
   }
