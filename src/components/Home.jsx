@@ -9,6 +9,7 @@ import { fetchFeaturedImgs } from "../modules/Home-page-modules/fetch-featured-i
 import { fetchAuthorName } from "../modules/Home-page-modules/fetch-author-name";
 import { formatDate } from "../modules/formatDate";
 import fetchPosts from "../modules/Home-page-modules/fetch_posts";
+import Pagination from "./Pagination";
 
 function Home() {
   useEffect(() => {
@@ -124,55 +125,11 @@ function Home() {
             })}
         </div>
 
-        <nav aria-label="Page navigation example" className="nav-cont">
-          <ul className="pagination">
-            <li className="page-item">
-              <a
-                className="page-link"
-                onClick={() => setPageNumber((page) => page - 1)}
-                disabled={pageNumber === 1}
-                aria-label="Previous"
-              >
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                1
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                2
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                3
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                4
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                5
-              </a>
-            </li>
-            <li className="page-item">
-              <a
-                className="page-link"
-                onClick={() => setPageNumber((page) => page + 1)}
-                disabled={pageNumber === 5}
-                aria-label="Next"
-              >
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <Pagination
+          totalPages={8}
+          currentPage={pageNumber}
+          onPageChange={(page) => setPageNumber(page)}
+        />
       </>
     );
   }

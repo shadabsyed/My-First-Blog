@@ -71,7 +71,8 @@ body {
   height: 250px;
 }
 .nav-cont {
-  margin-left: 550px;
+  margin-left: 500px;
+  margin-top: 30px;
 }
 /* .container {
   background-color: #f7fafc;
@@ -191,4 +192,13 @@ body {
   opacity: 0.8;
   border-radius: 9999px;
   vertical-align: 0.1875em;
+}
+
+.page-link {
+  background-color: none;
+}
+
+.active {
+  background-color: #1566bd;
+  color: white;
 }
