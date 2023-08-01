@@ -15,11 +15,6 @@ function Home() {
   useEffect(() => {
     document.title = "Home Page";
   }, []);
-  fetch(
-    "https://hostplover.com/stest/wp-json/wp/v2/posts?page=2&per_page=8"
-  ).then((res) => {
-    console.log(res.headers);
-  });
 
   // Fetching all posts
 
@@ -124,9 +119,8 @@ function Home() {
               );
             })}
         </div>
-
         <Pagination
-          totalPages={8}
+          totalPages={40}
           currentPage={pageNumber}
           onPageChange={(page) => setPageNumber(page)}
         />
