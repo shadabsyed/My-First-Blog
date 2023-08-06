@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { formatDate } from "../modules/formatDate";
 import { Link } from "react-router-dom";
 // Components
 import ArrowRight from "./ArrowRight";
+
 // Modules
 import fetchCategIdByCategSlug from "../modules/SameCategPosts-page-modules/fetch-categId-by-categSlug";
 import fetchPostsByCategId from "../modules/SameCategPosts-page-modules/fetch-posts-by-categId";
@@ -21,6 +22,8 @@ const SameCategPosts = () => {
   /**
    *  fethcing catgeory id by categroy slug
    */
+
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { data: categorySlugData } = fetchCategIdByCategSlug(category_slug);
 

@@ -20,12 +20,9 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
         pageLinks.push(
           <Link
             key={pageNumber}
+            to={`/page/${pageNumber}/`}
             className="page-numbers"
-            to={`https://hostplover.com/stest/page/${pageNumber}/`}
-            onClick={(e) => {
-              e.preventDefault();
-              onPageChange(pageNumber);
-            }}
+            onClick={() => onPageChange(pageNumber)}
           >
             {pageNumber}
           </Link>

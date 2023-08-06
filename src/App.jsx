@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SinglePost from "./components/SinglePost";
 import SameCategPosts from "./components/SameCategPosts";
+import Pagination from "./components/Pagination";
 
 const App = () => {
   return (
@@ -14,7 +15,7 @@ const App = () => {
           path="/category/:category_slug"
           element={<SameCategPosts />}
         ></Route>
-        <Route></Route>
+        <Route path="/page/:pageNumberParam" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );

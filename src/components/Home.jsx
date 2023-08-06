@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 // Componenets
@@ -12,14 +12,20 @@ import fetchPosts from "../modules/Home-page-modules/fetch_posts";
 import Pagination from "./Pagination";
 
 function Home() {
-  useEffect(() => {
-    document.title = "Home Page";
-  }, []);
+  const { pageNumberParam } = useParams();
+  const initialPageNumber = parseInt(pageNumberParam);
+  const [pageNumber, setPageNumber] = useState(
+    isNaN(initialPageNumber) ? 1 : initialPageNumber
+  );
 
   // Fetching all posts
 
-  const [pageNumber, setPageNumber] = useState(1);
   const { isLoading, error, data } = fetchPosts(pageNumber);
+
+  useEffect(() => {
+    document.title = "Home Page";
+    setPageNumber(isNaN(initialPageNumber) ? 1 : initialPageNumber);
+  }, [initialPageNumber]);
 
   // fetching category
 
