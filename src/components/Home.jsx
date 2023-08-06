@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 
 // Componenets
 import ArrowRight from "./ArrowRight";
+import PaginationContainer from "./PaginationContainer";
 // Modules
 import { fetchCategories } from "../modules/Home-page-modules/fetch-categories";
 import { fetchFeaturedImgs } from "../modules/Home-page-modules/fetch-featured-images";
 import { fetchAuthorName } from "../modules/Home-page-modules/fetch-author-name";
 import { formatDate } from "../modules/formatDate";
 import fetchPosts from "../modules/Home-page-modules/fetch_posts";
-import Pagination from "./Pagination";
 
 function Home() {
   const { pageNumberParam } = useParams();
@@ -125,7 +125,7 @@ function Home() {
               );
             })}
         </div>
-        <Pagination
+        <PaginationContainer
           totalPages={40}
           currentPage={pageNumber}
           onPageChange={(page) => setPageNumber(page)}
