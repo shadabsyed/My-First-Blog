@@ -11,10 +11,11 @@ import fetchPostsByCategId from "../modules/SameCategPosts-page-modules/fetch-po
 import fetchCategoryName from "../modules/SameCategPosts-page-modules/fetch-categoryName";
 import fetchFdImg from "../modules/SameCategPosts-page-modules/fetch-featuredImg";
 import fetchAuthorName from "../modules/SameCategPosts-page-modules/fetch-authorName";
+import SameCategPostsPagination from "./SameCategPostsPagination";
 
 const SameCategPosts = () => {
   useEffect(() => {
-    document.title = "SameCategPosts Page";
+    document.title = `${category_slug}`;
   }, []);
 
   const { category_slug } = useParams();
@@ -22,8 +23,6 @@ const SameCategPosts = () => {
   /**
    *  fethcing catgeory id by categroy slug
    */
-
-  const [currentPage, setCurrentPage] = useState(1);
 
   const { data: categorySlugData } = fetchCategIdByCategSlug(category_slug);
 
@@ -33,7 +32,33 @@ const SameCategPosts = () => {
    *   fetcing posts by category id
    */
 
-  const { data: categoryPosts } = fetchPostsByCategId(categoryId);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const [totalPages, setTotalPages] = useState(1);
+
+  const { data: categoryData } = fetchPostsByCategId(categoryId, currentPage);
+
+  const categoryPosts = categoryData?.data;
+
+  // console.log(categoryData?.headers?.get("x-wp-totalpages"));
+
+  // step for pagination
+
+  useEffect(() => {
+    setTotalPages(categoryData?.headers?.get("x-wp-totalpages"), 10);
+  }, [categoryData]);
+
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
 
   /**
    *  fetching category name by category id
@@ -74,10 +99,24 @@ const SameCategPosts = () => {
         {categoryPosts?.map((post) => (
           <div key={post.id} className="col-md-4 mt-4">
             <div className="card custom-card" style={{ border: "none" }}>
-              {img && <img src={img} className="card-img-top" />}
+              <Link to={"/" + post.slug}>
+                {" "}
+                {img && <img src={img} className="card-img-top" />}
+              </Link>
               <div className="card-body">
-                <h2 className="card-title">{post.title.rendered}</h2>
-                {categoryName && <p>{categoryName?.name}</p>}
+                {categoryName && (
+                  <p className="category samecateg-category">
+                    {categoryName?.name}
+                  </p>
+                )}
+                <h2>
+                  <Link
+                    to={"/" + post.slug}
+                    className="card-title samecateg-title"
+                  >
+                    {post.title.rendered}{" "}
+                  </Link>
+                </h2>
 
                 <p className="card-text">
                   {" "}
@@ -91,15 +130,24 @@ const SameCategPosts = () => {
                     __html: post.excerpt.rendered,
                   }}
                 ></div>
-                <Link to={"/" + post.slug} className="card-link">
-                  Read More
-                </Link>
-                <ArrowRight />
+                <div className="link">
+                  <Link to={"/" + post.slug} className="card-link">
+                    Read More
+                  </Link>
+                  <ArrowRight />
+                </div>
               </div>
             </div>
           </div>
         ))}
       </div>
+      <SameCategPostsPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        prevPage={prevPage}
+        nextPage={nextPage}
+        setCurrentPage={setCurrentPage}
+      />
     </>
   );
 };

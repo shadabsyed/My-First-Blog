@@ -9,7 +9,7 @@ import fetchAuthorName from "../modules/SinglePost-page-modules/fetch_author_nam
 
 function SinglePost() {
   useEffect(() => {
-    document.title = "SinglePost Page";
+    document.title = `${slug}`;
   }, []);
 
   /**

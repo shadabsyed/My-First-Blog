@@ -1,3 +1,5 @@
+/* Globle start*/
+
 body {
   overflow-x: hidden;
 }
@@ -5,6 +7,11 @@ body {
 .row {
   background-color: #f7fafc;
 }
+
+/* globle end */
+
+/* spinner start */
+
 @keyframes ldio-kp674rbvsx {
   0% {
     top: 96px;
@@ -50,7 +57,7 @@ body {
   position: relative;
   transform: translateZ(0) scale(1);
   backface-visibility: hidden;
-  transform-origin: 0 0; /* see note above */
+  transform-origin: 0 0;
 }
 .ldio-kp674rbvsx div {
   box-sizing: content-box;
@@ -60,9 +67,11 @@ body {
   text-align: center;
   margin-top: 200px;
 }
+/* spinner end */
+
+/* for all cards start */
 
 .custom-card {
-  /* width: 18rem; */
   height: 100%;
   box-shadow: 0px 15px 15px -10px rgba(0, 0, 0, 0.05);
 }
@@ -70,38 +79,79 @@ body {
 .card-img-top {
   height: 250px;
 }
-.nav-cont {
-  margin-left: 10px;
-  margin-top: 30px;
-  margin-bottom: 30px;
+
+.card-title {
+  font-weight: 700;
+  line-height: 1.5;
+  color: black;
 }
 
-.page-numbers {
-  margin: 0 15px;
-  font-size: 20px;
-  border-radius: 3px;
+.card-link {
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: black;
+  font-size: 80%;
 }
 
-.current {
-  background: #1566bd;
-  color: white;
-  padding: 7px 15px;
+.category {
+  color: #2b6cb0;
+  margin-bottom: 0.5em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-button:disabled {
-  display: none;
+.card-title:hover {
+  color: #2b6cb0;
+  text-decoration: none;
 }
 
-.nav-btn {
-  border: none;
-  margin: 0 10px;
-  background: none;
-  font-size: 20px;
+.dot::after {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  content: "";
+  display: inline-block;
+  background-color: currentColor;
+  height: 0.25rem;
+  width: 0.25rem;
+  opacity: 0.8;
+  border-radius: 9999px;
+  vertical-align: 0.1875em;
 }
-/* .container {
-  background-color: #f7fafc;
-  margin: 0;
-} */
+
+.link:hover {
+  color: #2b6cb0;
+}
+
+/* for all cards end */
+
+/* home page start */
+
+.homePage-title {
+  font-size: 28px;
+  text-decoration: none;
+  color: black;
+}
+
+.homePage-category {
+  font-size: 75%;
+  line-height: 50px;
+}
+
+/* home page end */
+
+/* single post page start */
+
+.singlePage-title {
+  font-size: 32px;
+}
+
+.singlePage-category {
+  font-size: 100%;
+}
 
 .singlePost-card {
   width: 800px;
@@ -128,7 +178,6 @@ button:disabled {
   bottom: 0;
   left: 0;
   right: 0;
-  /* background-color: #f7fafc; */
 }
 
 .img img {
@@ -136,19 +185,17 @@ button:disabled {
   height: 500px;
 }
 
-.card-title {
-  font-weight: 700;
-  line-height: 1.5;
-}
+/* single post page end */
 
-.singlePage-title {
-  font-size: 32px;
-}
+/* same categ posts start */
 
-.homePage-title {
+.samecateg-title {
   font-size: 28px;
-  text-decoration: none;
-  color: black;
+}
+
+.samecateg-category {
+  font-size: 75%;
+  line-height: 1.6;
 }
 
 .categorySlugCont {
@@ -169,59 +216,49 @@ button:disabled {
   line-height: 1.5;
 }
 
-.card-title:hover {
-  color: #2b6cb0;
-  text-decoration: none;
+/* same categ posts end */
+
+/* pagination start */
+
+.nav-cont {
+  margin-left: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-.card-link {
-  font-weight: bold;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: black;
-  font-size: 80%;
+.nav-links {
+  margin: 20px 20px;
 }
 
-.link:hover {
-  color: #2b6cb0;
+.page-numbers {
+  margin: 0 15px;
+  font-size: 20px;
 }
 
-.category {
-  color: #2b6cb0;
-  margin-bottom: 0.5em;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  text-decoration: none;
-  font-weight: bold;
+.page-number-btn {
+  margin: 0 10px;
+  border: none;
+  background: none;
+  color: #1566bd;
 }
 
-.singlePage-category {
-  font-size: 100%;
+.current {
+  background: #1566bd;
+  color: white;
+  padding: 7px 15px;
+  border-radius: 3px;
 }
 
-.homePage-category {
-  font-size: 75%;
-  line-height: 50px;
+button:disabled {
+  display: none;
 }
 
-.dot::after {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  content: "";
-  display: inline-block;
-  background-color: currentColor;
-  height: 0.25rem;
-  width: 0.25rem;
-  opacity: 0.8;
-  border-radius: 9999px;
-  vertical-align: 0.1875em;
+.nav-btn {
+  border: none;
+  margin: 0 10px;
+  background: none;
+  font-size: 20px;
+  color: #1566bd;
 }
 
-.page-item {
-  background-color: none;
-}
-
-.active {
-  background-color: #1566bd;
-}
+/* pagination end */

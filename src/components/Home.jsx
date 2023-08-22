@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 
 // Componenets
 import ArrowRight from "./ArrowRight";
-import PaginationContainer from "./PaginationContainer";
+import Pagination from "./Pagination";
+
 // Modules
 import { fetchCategories } from "../modules/Home-page-modules/fetch-categories";
 import { fetchFeaturedImgs } from "../modules/Home-page-modules/fetch-featured-images";
@@ -125,7 +126,7 @@ function Home() {
               );
             })}
         </div>
-        <PaginationContainer
+        <Pagination
           totalPages={40}
           currentPage={pageNumber}
           onPageChange={(page) => setPageNumber(page)}
