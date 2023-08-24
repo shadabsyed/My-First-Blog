@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SameCategPostsPagination = ({
   currentPage,
   totalPages,
   prevPage,
   nextPage,
-  setCurrentPage,
+  category_slug,
 }) => {
   return (
     <div className="nav-links">
@@ -34,13 +35,13 @@ const SameCategPostsPagination = ({
               (difference >= -2 && difference <= 2)
             ) {
               return (
-                <button
+                <Link
                   key={pageNumber}
+                  to={`/category/${category_slug}/page/${pageNumber}`}
                   className="page-number-btn"
-                  onClick={() => setCurrentPage(pageNumber)}
                 >
                   {pageNumber}
-                </button>
+                </Link>
               );
             } else if (difference === 3 && totalPages - currentPage > 3) {
               return (
@@ -54,13 +55,12 @@ const SameCategPostsPagination = ({
         )}
         {currentPage === 1 && totalPages > 1 && (
           <>
-            <span className="dots">...</span>
-            <button
+            <Link
+              to={`/category/${category_slug}/page/${totalPages}`}
               className="page-number-btn"
-              onClick={() => setCurrentPage(totalPages)}
             >
               {totalPages}
-            </button>
+            </Link>
           </>
         )}
       </span>

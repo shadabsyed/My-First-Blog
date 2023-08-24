@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { formatDate } from "../modules/formatDate";
 import { Link } from "react-router-dom";
+
 // Components
 import ArrowRight from "./ArrowRight";
 
@@ -14,11 +15,9 @@ import fetchAuthorName from "../modules/SameCategPosts-page-modules/fetch-author
 import SameCategPostsPagination from "./SameCategPostsPagination";
 
 const SameCategPosts = () => {
-  useEffect(() => {
-    document.title = `${category_slug}`;
-  }, []);
+  const { category_slug, pageNumber } = useParams();
 
-  const { category_slug } = useParams();
+  const initialPageNumber = parseInt(pageNumber);
 
   /**
    *  fethcing catgeory id by categroy slug
@@ -32,7 +31,14 @@ const SameCategPosts = () => {
    *   fetcing posts by category id
    */
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(
+    isNaN(initialPageNumber) ? 1 : initialPageNumber
+  );
+
+  useEffect(() => {
+    document.title = `${category_slug}`;
+    setCurrentPage(isNaN(initialPageNumber) ? 1 : initialPageNumber);
+  }, [initialPageNumber]);
 
   const [totalPages, setTotalPages] = useState(1);
 
@@ -146,7 +152,7 @@ const SameCategPosts = () => {
         totalPages={totalPages}
         prevPage={prevPage}
         nextPage={nextPage}
-        setCurrentPage={setCurrentPage}
+        category_slug={category_slug}
       />
     </>
   );

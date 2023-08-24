@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 
-export function fetchFeaturedImgs(data, pageNumber) {
+export function fetchFeaturedImgs(posts, pageNumber) {
   // get featured imgs ids
 
   let imgsIds = [];
-  if (data && data.length) {
-    imgsIds = data.map((item) => item.featured_media);
+  if (posts && posts.length) {
+    imgsIds = posts.map((item) => item.featured_media);
 
     imgsIds = [...new Set(imgsIds)];
   }
@@ -18,6 +18,6 @@ export function fetchFeaturedImgs(data, pageNumber) {
           ","
         )}`
       ).then((res) => res.json()),
-    enabled: Boolean(data && data.length),
+    enabled: Boolean(posts && posts.length),
   });
 }

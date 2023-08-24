@@ -19,22 +19,28 @@ function Home() {
     isNaN(initialPageNumber) ? 1 : initialPageNumber
   );
 
-  // Fetching all posts
-
-  const { isLoading, error, data } = fetchPosts(pageNumber);
-
   useEffect(() => {
     document.title = "Home Page";
     setPageNumber(isNaN(initialPageNumber) ? 1 : initialPageNumber);
   }, [initialPageNumber]);
 
+  // Fetching all posts
+
+  const { isLoading, error, data: postsdata } = fetchPosts(pageNumber);
+
+  const posts = postsdata?.postdata;
+
+  // console.log(postsdata?.headers?.get("x-wp-totalpages"));
+
+  const totalPages = parseInt(postsdata?.headers?.get("x-wp-totalpages"));
+
   // fetching category
 
-  const { data: categories } = fetchCategories(data);
+  const { data: categories } = fetchCategories(posts);
 
   // fetching featured media
 
-  const { data: featuredImages } = fetchFeaturedImgs(data, pageNumber);
+  const { data: featuredImages } = fetchFeaturedImgs(posts, pageNumber);
 
   // fetching author name
 
@@ -58,8 +64,8 @@ function Home() {
     return (
       <>
         <div className="row p-5">
-          {data &&
-            data?.map((post) => {
+          {posts &&
+            posts?.map((post) => {
               const categoryNames = [];
               post.categories.forEach((categoryId) => {
                 const category = categories.find(
@@ -127,7 +133,7 @@ function Home() {
             })}
         </div>
         <Pagination
-          totalPages={40}
+          totalPages={totalPages}
           currentPage={pageNumber}
           onPageChange={(page) => setPageNumber(page)}
         />

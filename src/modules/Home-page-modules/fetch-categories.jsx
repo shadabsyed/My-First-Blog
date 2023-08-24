@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 
-export function fetchCategories(data) {
+export function fetchCategories(posts) {
   let categoryIds = [];
-  if (data && data.length)
-    data.forEach((item) => {
+  if (posts && posts.length)
+    posts.forEach((item) => {
       categoryIds = categoryIds.concat(item.categories);
     });
 
@@ -17,6 +17,6 @@ export function fetchCategories(data) {
           ","
         )}`
       ).then((res) => res.json()),
-    enabled: Boolean(data && data.length),
+    enabled: Boolean(posts && posts.length),
   });
 }
